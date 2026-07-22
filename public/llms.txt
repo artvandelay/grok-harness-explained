@@ -1,0 +1,21 @@
+# Harness Engineering
+
+> A nine-part conceptual guide to the software around a coding model, grounded in the Grok Build source.
+
+Guide: https://artvandelay.github.io/grok-harness-explained/
+Interactive source graph: https://artvandelay.github.io/grok-harness-graph/
+Source code studied: https://github.com/xai-org/grok-build
+Guide repository: https://github.com/artvandelay/grok-harness-explained
+
+## Topics
+
+- What an agent harness is
+- Agent loops and durable sessions
+- Tool schemas, dispatch, and action surfaces
+- Permission policies and sandboxing
+- Context assembly, compaction, memory, and workspace grounding
+- Model sampling, streamed events, retries, and loop recovery
+- MCP, ACP, subagents, and hooks
+- Terminal rendering and run modes
+
+The guide's deep source links are pinned to Grok Build commit a5727c5960452e7527a154b25cb5bf00cda0545e.

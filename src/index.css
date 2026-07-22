@@ -1,0 +1,217 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Source Serif 4', ui-serif, Georgia, serif;
+  --font-body: 'Source Serif 4', ui-serif, Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Page background (paper). Not reused elsewhere in the app. */
+  --color-paper: #fcfbf9;
+
+  /* Repointed for the light theme. Names kept as-is to limit churn. */
+  --color-ink: #1b1a18; /* headings / primary text */
+  --color-fog: #2c2a26; /* body text */
+  --color-mist: #6c675e; /* muted meta / captions */
+  --color-line: #e6e1d6; /* hairline border */
+  --color-ink-2: #f4f1ea; /* subtle raised surface */
+  --color-panel: #f4f1ea; /* subtle raised surface */
+
+  /* Formerly gold/green product accents — now a single technical-blue link
+     accent so nothing renders as a gold or green "button" color. */
+  --color-signal: #123f7a; /* link hover / strong accent */
+  --color-signal-soft: #1b5fb4; /* link default */
+  --color-leaf: #123f7a;
+  --color-leaf-soft: #1b5fb4;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    color: var(--color-fog);
+    background-color: var(--color-paper);
+    text-wrap: pretty;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  a {
+    color: var(--color-signal-soft);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  a:hover {
+    color: var(--color-signal);
+  }
+
+  ::selection {
+    background: rgba(27, 95, 180, 0.18);
+    color: var(--color-ink);
+  }
+
+  /* Base article typography. Applied as a scope class so components can
+     drop most inline color/leading utility classes on prose text. Lives in
+     @layer base so ordinary Tailwind utilities on individual elements still
+     win the cascade. */
+  .prose-article {
+    max-width: 68ch;
+  }
+
+  .prose-article p {
+    margin-top: 1.25em;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-fog);
+  }
+
+  .prose-article p:first-child {
+    margin-top: 0;
+  }
+
+  .prose-article h2 {
+    margin-top: 2.5em;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-ink);
+  }
+
+  .prose-article h3 {
+    margin-top: 2em;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--color-ink);
+  }
+
+  .prose-article ul,
+  .prose-article ol {
+    margin-top: 1.25em;
+    padding-left: 1.4em;
+    color: var(--color-fog);
+    line-height: 1.7;
+  }
+
+  .prose-article ul {
+    list-style: disc;
+  }
+
+  .prose-article ol {
+    list-style: decimal;
+  }
+
+  .prose-article li + li {
+    margin-top: 0.5em;
+  }
+
+  .prose-article code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: 3px;
+    padding: 0.15em 0.4em;
+  }
+
+  .prose-article pre {
+    margin-top: 1.25em;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 1em;
+    overflow-x: auto;
+    color: var(--color-fog);
+  }
+
+  .prose-article pre code {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .prose-article blockquote {
+    margin-top: 1.25em;
+    border-left: 2px solid var(--color-line);
+    padding-left: 1em;
+    color: var(--color-mist);
+    font-style: italic;
+  }
+
+  .prose-article table {
+    margin-top: 1.25em;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .prose-article th,
+  .prose-article td {
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.5em 0.75em;
+    text-align: left;
+  }
+
+  .prose-article a {
+    color: var(--color-signal-soft);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose-article a:hover {
+    color: var(--color-signal);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-rise {
+    animation: rise-in 0.5s ease-out both;
+  }
+
+  .animate-rise-delay {
+    animation: rise-in 0.55s ease-out 0.08s both;
+  }
+
+  .animate-rise-delay-2 {
+    animation: rise-in 0.6s ease-out 0.16s both;
+  }
+}
+
+.mermaid-wrap svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Enlarged diagram inside the zoom modal: start big, then user can zoom further. */
+.modal-mermaid-wrap {
+  width: min(90vw, 1100px);
+}
+
+.modal-mermaid-wrap svg {
+  width: 100%;
+  height: auto;
+  max-width: none;
+}
